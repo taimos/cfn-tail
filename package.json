@@ -1,7 +1,6 @@
 {
     "name": "cfn-tail",
     "version": "1.0.0",
-    "private": true,
     "bin": {
         "cfn-tail": "index.js"
     },
