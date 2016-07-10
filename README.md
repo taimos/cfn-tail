@@ -17,6 +17,14 @@ As a one-liner you can prepend the variable to the command `AWS_DEFAULT_REGION=e
 
 Logging will stop if the stack creation or update completes or fails.
 
+## Proxy support
+
+If you need support for HTTPS proxies. Install the `proxy-agent` package globally and set the correct environment variables.
+
+```
+npm -g install proxy-agent
+```
+
 ## Contribute
 
 Feel free to open issues, provide code improvements or updates to the documentation.

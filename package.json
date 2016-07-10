@@ -1,19 +1,22 @@
 {
-    "name": "cfn-tail",
-    "version": "1.0.0",
-    "bin": {
-        "cfn-tail": "index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+ssh://git@github.com/taimos/cfn-tail.git"
-    },
-    "description": "CloudFormation Tail for stack events",
-    "main": "index.js",
-    "author": "Taimos GmbH",
-    "license": "MIT",
-    "dependencies": {
-        "aws-sdk": "^2.3.16",
-        "q": "^1.4.1"
-    }
+  "name": "cfn-tail",
+  "version": "1.1.0",
+  "bin": {
+    "cfn-tail": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/taimos/cfn-tail.git"
+  },
+  "description": "CloudFormation Tail for stack events",
+  "main": "index.js",
+  "author": "Taimos GmbH",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.3.16",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "proxy-agent": "^2.0.0"
+  }
 }
