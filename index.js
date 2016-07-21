@@ -6,12 +6,15 @@
 
 "use strict";
 
+var argv = require('minimist')(process.argv.slice(2));
+var stackName = argv._[0];
+var awsRegion = argv.region || process.env.AWS_DEFAULT_REGION;
+
 var AWS = require('aws-sdk');
 var Q = require('q');
-var cfn = new AWS.CloudFormation({region: process.env.AWS_DEFAULT_REGION});
-var stackName = process.argv[2];
-
+var cfn = new AWS.CloudFormation({region: awsRegion});
 if (process.env.HTTPS_PROXY || process.env.https_proxy) {
+  
   try {
     var agent = require('proxy-agent');
     AWS.config.update({
