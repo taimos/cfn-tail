@@ -1,3 +1,6 @@
+# Version 1.2.0
+* add support for --region cli option
+
 # Version 1.1.0
 * add proxy support
 * better error handling

@@ -11,9 +11,12 @@ To install cfn-tail open a terminal and issue: `npm install -g cfn-tail`
 ## Usage
 
 To follow stack events type `cfn-tail <stackname>` in a shell. 
-You have to provide the desired AWS region using the `AWS_DEFAULT_REGION` environment variable.
 
-As a one-liner you can prepend the variable to the command `AWS_DEFAULT_REGION=eu-west-1 cfn-tail <stackname>`.
+You have to provide the desired AWS region using the `AWS_DEFAULT_REGION` environment variable or using the `--region` option.
+
+```
+cfn-tail --region eu-west-1 <stackname>
+```
 
 Logging will stop if the stack creation or update completes or fails.
 
