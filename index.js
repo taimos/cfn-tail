@@ -11,8 +11,6 @@ var stackName = argv._[0];
 var awsRegion = argv.region || process.env.AWS_DEFAULT_REGION;
 
 var AWS = require('aws-sdk');
-var Q = require('q');
-var cfn = new AWS.CloudFormation({region: awsRegion});
 if (process.env.HTTPS_PROXY || process.env.https_proxy) {
   
   try {
@@ -31,6 +29,9 @@ if (process.env.HTTPS_PROXY || process.env.https_proxy) {
     }
   }
 }
+
+var Q = require('q');
+var cfn = new AWS.CloudFormation({region: awsRegion});
 
 function listEvents(startEvent, startTime) {
   var deferred = Q.defer();
