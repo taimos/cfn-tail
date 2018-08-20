@@ -11,6 +11,8 @@ var stackName = argv._[0];
 var awsRegion = argv.region || process.env.AWS_DEFAULT_REGION;
 
 var AWS = require('aws-sdk');
+AWS.config.update({retryDelayOptions: {base: 700}});
+// Delays with maxRetries = 4: 700, 1400, 2800, 5600
 if (process.env.HTTPS_PROXY || process.env.https_proxy) {
   
   try {
