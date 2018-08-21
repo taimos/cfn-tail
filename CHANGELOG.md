@@ -1,3 +1,6 @@
+# Version 1.4.0
+* change retry delay to cope with rate limit errors
+
 # Version 1.3.0
 * fix proxy support
 
