@@ -6,9 +6,15 @@
 
 "use strict";
 
-var argv = require('minimist')(process.argv.slice(2));
+var argv = require('minimist')(process.argv.slice(2), {
+  "default": {
+    "color": true
+  }
+});
+
 var stackName = argv._[0];
 var awsRegion = argv.region || process.env.AWS_DEFAULT_REGION;
+var color = argv.color;
 
 var AWS = require('aws-sdk');
 AWS.config.update({retryDelayOptions: {base: 700}});
@@ -34,6 +40,17 @@ if (process.env.HTTPS_PROXY || process.env.https_proxy) {
 
 var Q = require('q');
 var cfn = new AWS.CloudFormation({region: awsRegion});
+
+// color
+var clc = require("cli-color");
+var positive = clc.green;
+var negative = clc.redBright;
+var neutral = clc.xterm(243);
+var warn = clc.xterm(208);
+var re_positive = new RegExp("CREATE_COMPLETE|UPDATE_COMPLETE|UPDATE_ROLLBACK_COMPLETE|ROLLBACK_COMPLETE");
+var re_negative = new RegExp("CREATE_IN_PROGRESS|CREATE_FAILED|DELETE_FAILED|DELETE_IN_PROGRESS|ROLLBACK_FAILED|ROLLBACK_IN_PROGRESS|UPDATE_FAILED|UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS|UPDATE_ROLLBACK_IN_PROGRESS|UPDATE_ROLLBACK_FAILED");
+var re_neutral = new RegExp("DELETE_COMPLETE");
+var re_warn = new RegExp("UPDATE_IN_PROGRESS|UPDATE_COMPLETE_CLEANUP_IN_PROGRESS");
 
 function listEvents(startEvent, startTime) {
   var deferred = Q.defer();
@@ -87,9 +104,20 @@ function printLine() {
 function printEvent(event) {
   // Timestamp,LogicalResourceId,ResourceStatus,ResourceStatusReason
   var out = '| ' + padRight(event.Timestamp.toISOString(), 25) + ' | ' + padRight(event.LogicalResourceId, 20);
-  out += ' | ' + padRight(event.ResourceStatus, 36) + ' | ' + padRight(event.ResourceStatusReason, 140) + ' |';
+  out += ' | ' + colorizeResourceStatus(padRight(event.ResourceStatus, 36)) + ' | ' + padRight(event.ResourceStatusReason, 140) + ' |';
   
   console.log(out);
+}
+
+function colorizeResourceStatus(status) {
+  if (color === false) return status;
+
+  if (re_positive.test(status)) return positive(status);
+  if (re_negative.test(status)) return negative(status);
+  if (re_neutral.test(status)) return neutral(status);
+  if (re_warn.test(status)) return warn(status);
+
+  return status;
 }
 
 var fiveMinutesAgo = new Date();
