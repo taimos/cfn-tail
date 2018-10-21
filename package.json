@@ -1,6 +1,6 @@
 {
   "name": "cfn-tail",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "bin": {
     "cfn-tail": "index.js"
   },
@@ -13,12 +13,12 @@
   "author": "Taimos GmbH",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.3.16",
+    "aws-sdk": "^2.339.0",
     "cli-color": "^v1.3.0",
     "minimist": "^1.2.0",
-    "q": "^1.4.1"
+    "q": "^1.5.1"
   },
   "devDependencies": {
-    "proxy-agent": "^2.0.0"
+    "proxy-agent": "^2.3.1"
   }
 }

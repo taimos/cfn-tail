@@ -1,3 +1,6 @@
+# Version 1.5.0
+* Add support for colored CLI output (disbale with `--color false`)
+
 # Version 1.4.0
 * change retry delay to cope with rate limit errors
 

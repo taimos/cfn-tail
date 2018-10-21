@@ -48,9 +48,9 @@ var negative = clc.redBright;
 var neutral = clc.xterm(243);
 var warn = clc.xterm(208);
 var re_positive = new RegExp("CREATE_COMPLETE|UPDATE_COMPLETE|UPDATE_ROLLBACK_COMPLETE|ROLLBACK_COMPLETE");
-var re_negative = new RegExp("CREATE_IN_PROGRESS|CREATE_FAILED|DELETE_FAILED|DELETE_IN_PROGRESS|ROLLBACK_FAILED|ROLLBACK_IN_PROGRESS|UPDATE_FAILED|UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS|UPDATE_ROLLBACK_IN_PROGRESS|UPDATE_ROLLBACK_FAILED");
+var re_negative = new RegExp("CREATE_FAILED|DELETE_FAILED|ROLLBACK_FAILED|ROLLBACK_IN_PROGRESS|UPDATE_FAILED|UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS|UPDATE_ROLLBACK_IN_PROGRESS|UPDATE_ROLLBACK_FAILED");
 var re_neutral = new RegExp("DELETE_COMPLETE");
-var re_warn = new RegExp("UPDATE_IN_PROGRESS|UPDATE_COMPLETE_CLEANUP_IN_PROGRESS");
+var re_warn = new RegExp("CREATE_IN_PROGRESS|DELETE_IN_PROGRESS|UPDATE_IN_PROGRESS|UPDATE_COMPLETE_CLEANUP_IN_PROGRESS");
 
 function listEvents(startEvent, startTime) {
   var deferred = Q.defer();
@@ -110,13 +110,21 @@ function printEvent(event) {
 }
 
 function colorizeResourceStatus(status) {
-  if (color === false) return status;
-
-  if (re_positive.test(status)) return positive(status);
-  if (re_negative.test(status)) return negative(status);
-  if (re_neutral.test(status)) return neutral(status);
-  if (re_warn.test(status)) return warn(status);
-
+  if (color === false || color === 'false') {
+    return status;
+  }
+  if (re_positive.test(status)) {
+    return positive(status);
+  }
+  if (re_negative.test(status)) {
+    return negative(status);
+  }
+  if (re_neutral.test(status)) {
+    return neutral(status);
+  }
+  if (re_warn.test(status)) {
+    return warn(status);
+  }
   return status;
 }
 
