@@ -1,3 +1,6 @@
+# Version 1.5.1
+* Small fix for colored CLI output
+
 # Version 1.5.0
 * Add support for colored CLI output (disbale with `--color false`)
 
