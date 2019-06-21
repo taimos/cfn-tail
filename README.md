@@ -20,6 +20,11 @@ cfn-tail --region eu-west-1 <stackname>
 
 Logging will stop if the stack creation or update completes or fails.
 
+### Optional Arguments
+
+- `--retryMs <number>` specifies the value in milliseconds to use for custom exponential backoff; defaults to `700`. Use this option if you frequently experience API throttling errors.
+- `--color <bool>` specifies whether to colorize the output; defaults to `true`
+
 ## Proxy support
 
 If you need support for HTTPS proxies. Install the `proxy-agent` package globally and set the correct environment variables.
