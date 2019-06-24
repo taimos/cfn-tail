@@ -8,17 +8,19 @@
 
 var argv = require('minimist')(process.argv.slice(2), {
   "default": {
-    "color": true
+    "color": true,
+    "retryMs": 700
+    // Delays with maxRetries = 4: 700, 1400, 2800, 5600
   }
 });
 
 var stackName = argv._[0];
 var awsRegion = argv.region || process.env.AWS_DEFAULT_REGION;
 var color = argv.color;
+var retryMs = argv.retryMs;
 
 var AWS = require('aws-sdk');
-AWS.config.update({retryDelayOptions: {base: 700}});
-// Delays with maxRetries = 4: 700, 1400, 2800, 5600
+AWS.config.update({retryDelayOptions: {base: retryMs}});
 if (process.env.HTTPS_PROXY || process.env.https_proxy) {
   
   try {
