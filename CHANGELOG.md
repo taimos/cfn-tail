@@ -1,8 +1,12 @@
+# Version 1.6.0
+* Another fix for colored CLI output
+* Update libraries
+
 # Version 1.5.1
 * Small fix for colored CLI output
 
 # Version 1.5.0
-* Add support for colored CLI output (disbale with `--color false`)
+* Add support for colored CLI output (disable with `--color false`)
 
 # Version 1.4.0
 * change retry delay to cope with rate limit errors
