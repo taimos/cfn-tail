@@ -16,10 +16,18 @@ var argv = require('minimist')(process.argv.slice(2), {
 
 var stackName = argv._[0];
 var awsRegion = argv.region || process.env.AWS_DEFAULT_REGION;
+var awsProfile = argv.profile || process.env.AWS_PROFILE;
 var color = argv.color;
 var retryMs = argv.retryMs;
 
 var AWS = require('aws-sdk');
+
+if (awsProfile) {
+  var credentials = new AWS.SharedIniFileCredentials({profile: awsProfile});
+  AWS.config.credentials = credentials;
+}
+
+
 AWS.config.update({retryDelayOptions: {base: retryMs}});
 if (process.env.HTTPS_PROXY || process.env.https_proxy) {
   
